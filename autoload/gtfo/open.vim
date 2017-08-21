@@ -59,7 +59,7 @@ func! s:find_cygwin_bash() abort
   let path = s:try_find_git_bin('Git/usr/bin/mintty.exe')
   let path = '' !=# path ? path : s:try_find_git_bin('Git/bin/bash.exe')
   "return path or fallback to vanilla cygwin.
-  return '' !=# path ? path : 
+  return '' !=# path ? path :
         \ (executable($SystemDrive.'/cygwin/bin/bash') ? $SystemDrive.'/cygwin/bin/bash' : '')
 endf
 
@@ -175,7 +175,7 @@ func! gtfo#open#term(dir, cmd) abort "{{{
     endif
   elseif s:is_gui_available
     if !s:empty(s:termpath)
-      silent call system(s:termpath." ".shellescape(l:dir))
+      silent call system(s:termpath." ".shellescape(l:dir)." &")
     elseif executable('gnome-terminal')
       silent call system('gnome-terminal --window -e "$SHELL -c \"cd '''.l:dir.''' ; exec $SHELL\""')
     else
